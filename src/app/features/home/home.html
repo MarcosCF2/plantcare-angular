@@ -1,0 +1,97 @@
+<div class="home">
+  <section class="hero">
+    <div class="hero-conteudo">
+      <span class="etiqueta">Cuidar de plantas ficou simples</span>
+      <h1>Suas plantas <em>sempre bem cuidadas.</em></h1>
+      <p>O PlantCare reúne espécies, ambientes e frequência de rega em um só lugar — simples para quem cuida
+        e agradável de acompanhar.</p>
+      <div class="acoes">
+        <a class="botao botao-primario" routerLink="/plantas">Explorar plantas</a>
+        <a class="botao botao-secundario" routerLink="/sobre">Conhecer o projeto</a>
+      </div>
+      <div class="indicadores" aria-label="Destaques da plataforma">
+        <div><strong>100%</strong><span>verde</span></div>
+        <div><strong>10</strong><span>plantas cadastradas</span></div>
+        <div><strong>∞</strong><span>folhas novas</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="circulo circulo-um"></div>
+      <div class="circulo circulo-dois"></div>
+      <div class="cartao cartao-principal">
+        <span class="icone">🌿</span>
+        <small>Cuidados em destaque</small>
+        <strong>Transforme seu cantinho em um jardim saudável.</strong>
+        <div class="linha"><span></span><span></span></div>
+      </div>
+      <div class="cartao cartao-flutuante cartao-vendas"><span>↗</span>
+        <div><strong>Rega</strong><small>sempre no prazo</small></div>
+      </div>
+      <div class="cartao cartao-flutuante cartao-criadores"><span>♥</span>
+        <div><strong>Plantas</strong><small>cuidado que conecta</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vitrine" aria-labelledby="titulo-vitrine">
+    <div class="vitrine-cabecalho">
+      <div>
+        <span class="etiqueta">Verde para você</span>
+        <h2 id="titulo-vitrine">Plantas em destaque</h2>
+        <p>Uma amostra das plantas cadastradas no PlantCare.</p>
+      </div>
+      <div class="controles" aria-label="Controles do carrossel">
+        <button type="button" aria-label="Ver plantas anteriores" (click)="moverCarrossel(trilho, -1)">←</button>
+        <button type="button" aria-label="Ver próximas plantas" (click)="moverCarrossel(trilho, 1)">→</button>
+      </div>
+    </div>
+
+    <div class="trilho" #trilho tabindex="0" aria-label="Carrossel de plantas em destaque">
+      @for (planta of plantasDestaque$ | async; track planta.id) {
+      <article class="card-planta">
+        <div class="capa" [class]="'capa ' + ['azul', 'dourado', 'verde', 'lilas', 'coral'][planta.id.charCodeAt(planta.id.length - 1) % 5]">
+          <span>🌿</span>
+          <small>PlantCare</small>
+        </div>
+        <div class="card-corpo">
+          <span class="categoria">{{ planta.especie }}</span>
+          <h3>{{ planta.nome }}</h3>
+          <a [routerLink]="['/plantas', planta.id]" [attr.aria-label]="'Conhecer ' + planta.nome">Conhecer
+            <span>→</span></a>
+        </div>
+      </article>
+      }
+    </div>
+    <p class="dica-arraste">Arraste para o lado para ver mais plantas</p>
+  </section>
+
+  <section class="recursos" aria-labelledby="titulo-recursos">
+    <div class="cabecalho-secao">
+      <span class="etiqueta">Do cadastro ao cuidado</span>
+      <h2 id="titulo-recursos">Tudo o que suas plantas precisam</h2>
+      <p>Uma experiência pensada para organizar suas plantas e lembrar você de cada cuidado.</p>
+    </div>
+    <div class="grade-recursos">
+      <article><span class="numero">01</span>
+        <h3>Organize</h3>
+        <p>Reúna suas plantas, espécies e ambientes em um só lugar.</p>
+      </article>
+      <article class="destaque"><span class="numero">02</span>
+        <h3>Apresente</h3>
+        <p>Mostre a espécie, a localização e a frequência de rega de cada planta.</p>
+      </article>
+      <article><span class="numero">03</span>
+        <h3>Acompanhe</h3>
+        <p>Veja quais plantas precisam de atenção e planeje as próximas manutenções.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="chamada-final">
+    <div><span class="etiqueta">Pronto para começar?</span>
+      <h2>Tem sempre uma nova folha esperando para crescer.</h2>
+    </div>
+    <a class="botao botao-claro" routerLink="/plantas">Ver plantas <span>→</span></a>
+  </section>
+</div>

@@ -1,0 +1,96 @@
+<section class="form-box" aria-labelledby="titulo-formulario">
+  <h1 id="titulo-formulario">{{ editingId !== null ? 'Editar planta' : 'Adicionar planta' }}</h1>
+  <p>Preencha os dados da planta. A frequência de rega deve ser informada em dias.</p>
+
+  @if (loadingData) {
+    <div class="info-message" role="status">Carregando dados da planta...</div>
+  }
+  @if (successMessage) {
+    <div class="success-message" role="status">{{ successMessage }}</div>
+  }
+  @if (errorMessage) {
+    <div class="error-message" role="alert">{{ errorMessage }}</div>
+  }
+  @if (loadError && editingId !== null) {
+    <button type="button" (click)="loadPlanta(editingId)">Tentar carregar novamente</button>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()" [attr.aria-busy]="loading || loadingData">
+    <fieldset [disabled]="loading || loadingData || loadError || successMessage !== ''">
+      <legend>Dados da planta</legend>
+      <div class="fields">
+        <div class="field">
+          <label for="nome">Nome da planta</label>
+          <input
+            id="nome"
+            type="text"
+            formControlName="nome"
+            required
+            minlength="3"
+            aria-describedby="nome-ajuda"
+          />
+          <span id="nome-ajuda" class="character-count"
+            >{{ form.controls.nome.value.length }} caracteres · mínimo de 3</span
+          >
+          @if (form.controls.nome.touched && form.controls.nome.invalid) {
+            <small>Informe o nome da planta com no mínimo 3 caracteres.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="especie">Espécie</label>
+          <input id="especie" type="text" formControlName="especie" required />
+          @if (form.controls.especie.touched && form.controls.especie.invalid) {
+            <small>Informe a espécie da planta.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="localizacao">Localização / ambiente</label>
+          <input id="localizacao" type="text" formControlName="localizacao" required />
+          @if (form.controls.localizacao.touched && form.controls.localizacao.invalid) {
+            <small>Informe onde a planta está (ex.: sala, varanda, jardim).</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="frequenciaRegaDias">Frequência de rega (dias)</label>
+          <input
+            id="frequenciaRegaDias"
+            type="number"
+            formControlName="frequenciaRegaDias"
+            required
+            min="1"
+            step="1"
+          />
+          @if (form.controls.frequenciaRegaDias.touched && form.controls.frequenciaRegaDias.invalid) {
+            <small>Informe um número inteiro maior que zero.</small>
+          }
+        </div>
+
+        <div class="field">
+          <label for="ultimaManutencao">Última manutenção</label>
+          <input id="ultimaManutencao" type="date" formControlName="ultimaManutencao" />
+        </div>
+
+        <div class="field">
+          <label for="observacoes">Observações (opcional)</label>
+          <textarea id="observacoes" rows="3" formControlName="observacoes"></textarea>
+        </div>
+      </div>
+
+      <label class="checkbox-field" for="precisaAtencao">
+        <input id="precisaAtencao" type="checkbox" formControlName="precisaAtencao" />
+        Precisa de atenção
+      </label>
+
+      <button type="submit">
+        {{
+          loading ? 'Salvando...' : editingId !== null ? 'Salvar alterações' : 'Cadastrar planta'
+        }}
+      </button>
+    </fieldset>
+  </form>
+
+  <a class="back-link" routerLink="/admin">Voltar para administração</a>
+</section>

@@ -1,0 +1,49 @@
+@if (planta$ | async; as planta) {
+<article class="detalhe">
+  <a class="voltar" routerLink="/plantas"><span>←</span> Voltar para plantas</a>
+  <section class="apresentacao">
+    <div class="capa" [class]="'capa ' + ['azul', 'dourado', 'verde', 'lilas', 'coral'][planta.id.charCodeAt(planta.id.length - 1) % 5]" aria-hidden="true">
+      <span>🌿</span><small>PlantCare</small>
+    </div>
+    <div class="informacoes">
+      <span class="categoria">{{ planta.especie }}</span>
+      <h1>{{ planta.nome }}</h1>
+      <p class="introducao">Confira os cuidados e as informações de manutenção de {{ planta.nome }}.</p>
+      <div class="metadados">
+        <div><span>Localização</span><strong>{{ planta.localizacao }}</strong></div>
+        <div><span>Situação</span><strong>{{ planta.precisaAtencao ? 'Precisa de atenção' : 'Em dia' }}</strong></div>
+        <div><span>Rega</span><strong>A cada {{ planta.frequenciaRegaDias }} dia(s)</strong></div>
+      </div>
+      <p class="preco"><span>Última manutenção</span><strong>{{ planta.ultimaManutencao ? (planta.ultimaManutencao | date:'dd/MM/yyyy') : 'Não informada' }}</strong></p>
+      <a class="botao-principal" routerLink="/admin/form" [queryParams]="{ id: planta.id }">Editar esta planta <span>→</span></a>
+    </div>
+  </section>
+  <section class="descricao">
+    <div class="texto">
+      <span class="rotulo">Sobre esta planta</span>
+      <h2>{{ planta.nome }}</h2>
+      <p>A espécie é {{ planta.especie }}. Ela fica em {{ planta.localizacao }} e deve ser regada a cada
+        {{ planta.frequenciaRegaDias }} dia(s).</p>
+      @if (planta.observacoes) {
+      <p>Observações: {{ planta.observacoes }}</p>
+      }
+    </div>
+    <aside>
+      <h3>Informações da planta</h3>
+      <ul>
+        <li><span>✓</span> {{ planta.especie }}</li>
+        <li><span>✓</span> {{ planta.localizacao }}</li>
+        <li><span>✓</span> Rega a cada {{ planta.frequenciaRegaDias }} dia(s)</li>
+        <li><span>{{ planta.precisaAtencao ? '⚠' : '✓' }}</span> {{ planta.precisaAtencao ? 'Precisa de atenção' : 'Cuidados em dia' }}</li>
+      </ul>
+    </aside>
+  </section>
+</article>
+} @else {
+<section class="nao-encontrado">
+  <span>404</span>
+  <h1>Planta não encontrada</h1>
+  <p>A planta pode não existir ou ter sido removida da lista.</p>
+  <a routerLink="/plantas">Ver todas as plantas</a>
+</section>
+}

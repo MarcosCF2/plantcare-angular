@@ -1,0 +1,9 @@
+.cabecalho { background: #dcebdc; color: #173f2b; border-bottom: 1px solid #c4dec8; }
+.cabecalho-conteudo { width: 100%; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+.marca { color: #174d35; text-decoration: none; font-size: 1.5rem; font-weight: 800; }
+nav { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+nav a { color: #1a5239; text-decoration: none; padding: 9px 13px; border-radius: 8px; font-weight: 600; }
+nav a:hover, nav a.ativo { background: #b8dabb; color: #123c2a; }
+nav .botao-admin { background: #287855; color: #fff; font-weight: 700; }
+nav .botao-admin:hover, nav .botao-admin.ativo { background: #17573c; color: #fff; }
+@media (max-width: 600px) { .cabecalho-conteudo { flex-direction: column; align-items: flex-start; padding: 14px 16px; } nav { gap: 2px; } }

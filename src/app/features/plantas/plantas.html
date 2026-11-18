@@ -1,0 +1,54 @@
+<section class="pagina-plantas">
+  <div class="cabecalho-pagina">
+    <span class="etiqueta">CATÁLOGO PLANTCARE</span>
+    <h1>Conheça nossas plantas</h1>
+    <p>Conheça espécies, ambientes, iluminação e dicas para uma rotina de cuidados mais verde.</p>
+  </div>
+
+  <div class="area-filtros">
+    <label class="sr-only" for="pesquisa">Pesquisar planta</label>
+    <input id="pesquisa" type="search" placeholder="Pesquisar por nome, espécie ou ambiente..." [value]="pesquisa()" (input)="atualizarPesquisa($event)" />
+    <label class="sr-only" for="categoria">Categoria</label>
+    <select id="categoria" [value]="categoriaSelecionada()" (change)="atualizarCategoria($event)">
+      @for (categoria of categorias(); track categoria) {
+        <option [value]="categoria">{{ categoria }}</option>
+      }
+    </select>
+  </div>
+  <p class="contador">{{ plantasFiltradas().length }} de {{ plantas().length }} plantas encontradas</p>
+
+  @if (carregando()) {
+    <p role="status">Carregando plantas...</p>
+  } @else if (erro()) {
+    <p class="mensagem-erro" role="alert">{{ erro() }}</p>
+  } @else {
+    <div class="grade-plantas">
+      @for (planta of plantasFiltradas(); track planta.id) {
+        <article class="cartao-planta">
+          <div class="imagem-planta">
+            @if (planta.imagemUrl) {
+              <img [src]="planta.imagemUrl" [alt]="planta.nome" loading="lazy" />
+            } @else {
+              <span class="icone-planta" aria-hidden="true">🌿</span>
+            }
+          </div>
+          <div class="conteudo-cartao">
+            <span class="categoria">{{ planta.categoria || 'Outras' }}</span>
+            <h2>{{ planta.nome }}</h2>
+            <p class="nome-cientifico">{{ planta.especie }}</p>
+            <div class="informacoes">
+              <p>☀️ {{ planta.iluminacao || 'Iluminação a definir' }}</p>
+              <p>💧 Rega estimada: a cada {{ planta.regaIntervaloMinDias || planta.frequenciaRegaDias }} a {{ planta.regaIntervaloMaxDias || planta.frequenciaRegaDias }} dias</p>
+              <p>📍 {{ planta.localizacao }}</p>
+            </div>
+            <p class="descricao">{{ planta.observacoes || 'Cuidados disponíveis no detalhe da planta.' }}</p>
+            <a class="ver-detalhes" [routerLink]="['/plantas', planta.id]">Ver detalhes <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      } @empty {
+        <p class="sem-resultado">Nenhuma planta encontrada. Experimente outro termo ou categoria.</p>
+      }
+    </div>
+  }
+  <p class="aviso-cuidados">As frequências de rega são estimativas: confira a umidade do solo e as condições do ambiente antes de regar.</p>
+</section>

@@ -1,0 +1,184 @@
+
+:host {
+  display: block;
+}
+
+.pagina-plantas {
+  max-width: 1250px;
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+  color: #234639;
+}
+
+.cabecalho-pagina {
+  text-align: center;
+  padding: 45px 20px;
+  background: #e2eee5;
+  border-radius: 22px;
+  margin-bottom: 30px;
+}
+
+.etiqueta {
+  color: #347c68;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.cabecalho-pagina h1 {
+  font-size: clamp(30px, 4vw, 46px);
+  margin: 12px 0;
+  color: #1b4d2e;
+}
+
+.cabecalho-pagina p {
+  color: #527267;
+  line-height: 1.7;
+}
+
+.area-filtros {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.area-filtros input,
+.area-filtros select {
+  padding: 14px;
+  border: 1px solid #c8ddd0;
+  border-radius: 10px;
+  background: #fffdf8;
+  color: #234639;
+  font-size: 15px;
+}
+
+.area-filtros input {
+  flex: 1;
+  min-width: 0;
+}
+
+.area-filtros select {
+  width: 200px;
+}
+
+.contador {
+  color: #527267;
+  margin-bottom: 22px;
+}
+
+.grade-plantas {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.cartao-planta {
+  overflow: hidden;
+  background: #fffdf8;
+  border: 1px solid #dce9df;
+  border-radius: 18px;
+  box-shadow: 0 6px 22px rgba(33, 75, 53, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.cartao-planta:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(33, 75, 53, 0.12);
+}
+
+.imagem-planta {
+  height: 190px;
+  background: linear-gradient(135deg, #dcebdc, #a9d0c3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.imagem-planta img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.icone-planta {
+  font-size: 70px;
+}
+
+.conteudo-cartao {
+  padding: 22px;
+}
+
+.categoria {
+  display: inline-block;
+  padding: 6px 12px;
+  background: #e2f2e7;
+  color: #2e7d4f;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.conteudo-cartao h2 {
+  margin: 15px 0 5px;
+  color: #1b4d2e;
+  font-size: 22px;
+}
+
+.nome-cientifico {
+  color: #6c8176;
+  font-size: 14px;
+  font-style: italic;
+}
+
+.informacoes {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 10px;
+  background: #f0f7f1;
+  color: #315a48;
+  font-size: 14px;
+}
+
+.informacoes p {
+  margin: 8px 0;
+}
+
+.descricao {
+  margin-top: 16px;
+  color: #62766b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.mensagem-erro {
+  color: #b42318;
+}
+
+@media (max-width: 950px) {
+  .grade-plantas {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .grade-plantas {
+    grid-template-columns: 1fr;
+  }
+
+  .area-filtros {
+    flex-direction: column;
+  }
+
+  .area-filtros select {
+    width: 100%;
+  }
+
+  .pagina-plantas {
+    padding: 20px 15px 50px;
+  }
+}
+
+.ver-detalhes { display:inline-flex; margin-top:14px; background:#277b59; color:#fff; padding:11px 16px; border-radius:9px; text-decoration:none; font-weight:700; }
+.ver-detalhes:hover { background:#16583c; }
+.sem-resultado { grid-column:1/-1; text-align:center; padding:40px; }
+.aviso-cuidados { margin-top:32px; color:#567468; font-size:.9rem; }

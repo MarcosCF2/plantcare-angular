@@ -1,0 +1,47 @@
+<section class="list-box">
+    <div class="top-bar">
+        <h2>Lista de Plantas</h2>
+        <div class="admin-acoes"><button type="button" class="btn-restaurar" (click)="restaurar()">Restaurar 50 plantas</button><a routerLink="/admin/form" class="btn">Nova planta</a></div>
+    </div>
+    @if (sucessMessage()) {
+        <div class="success-message" role="status">
+            {{ sucessMessage() }}
+        </div>
+    }
+
+    @if (errorMessage()) {
+        <div class="error-message" role="alert">
+            {{ errorMessage() }}
+        </div>
+    }
+
+    @if (loading()) {
+        <div class="loading">
+            <p>Carregando plantas...</p>
+        </div>
+    }
+    @if (!loading() && plantas().length === 0) {
+        <div class="empty-state">
+            <p>Nenhuma planta encontrada.</p>
+        </div>
+    }
+
+    <div class="planta-grid">
+        @for (planta of plantas(); track planta.id) {
+        <div class="planta-item" [class.atencao]="planta.precisaAtencao">
+            <h3>{{ planta.nome }}</h3>
+            <p>{{ planta.especie }} · {{ planta.localizacao }}</p>
+            <p>Rega a cada {{ planta.frequenciaRegaDias }} dia(s)</p>
+            @if (planta.precisaAtencao) {
+                <span class="selo-atencao">⚠️ Precisa de atenção</span>
+            } @else {
+                <span class="selo-ok">✅ Em dia</span>
+            }
+            <div class="actions">
+                <button type="button" class="btn-edit" (click)="edit(planta.id)">Editar</button>
+                <button type="button" class="btn-delete" (click)="remove(planta.id)">Excluir</button>
+            </div>
+        </div>
+        }
+    </div>
+</section>
